@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">dm1-modulo3</string>
+    <string name="informacoes">Informações:</string>
+    <string name="buscar">Buscar</string>
+    <string name="digite_cep_para_buscar_endereco">Digite o CEP para buscar o endereço:</string>
+</resources>
