@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="20dp"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -12,7 +13,6 @@
         android:layout_height="0dp"
         android:gravity="center_vertical"
         android:orientation="vertical"
-        android:padding="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,48 +23,27 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_gravity="center_horizontal"
-            app:srcCompat="@drawable/imagem_pagina" />
+            app:srcCompat="@drawable/imagem_logo_dm1_modulo3" />
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/digite_cep_para_buscar_endereco"
+            android:text="@string/bem_vindo"
             android:textAlignment="center"
-            android:textSize="20sp" />
-
-        <EditText
-            android:id="@+id/etCep"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@drawable/input"
-            android:ems="10"
-            android:inputType="number" />
+            android:textSize="34sp" />
 
         <Button
-            android:id="@+id/btBuscar"
+            android:id="@+id/btBuscarCepMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/buscar" />
+            android:layout_marginTop="20dp"
+            android:text="@string/buscar_cep" />
 
-        <TextView
-            android:id="@+id/tvInfo"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:text="@string/informacoes"
-            android:textAlignment="center"
-            android:textSize="16sp" />
-
-        <ProgressBar
-            android:id="@+id/pbLoading"
-            style="?android:attr/progressBarStyle"
+        <Button
+            android:id="@+id/btBuscarCnpjMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="invisible" />
-
+            android:text="@string/buscar_cnpj" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

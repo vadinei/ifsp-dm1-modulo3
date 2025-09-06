@@ -1,12 +1,9 @@
 package com.vadinei.dm1.modulo3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,17 +11,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.vadinei.dm1.modulo3.api.InverTextoApi;
-import com.vadinei.dm1.modulo3.model.LogradouroModel;
-import com.vadinei.dm1.modulo3.util.ConstantUtil;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,56 +24,23 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Cria as variáveis e faz o mapamento com a View
-        final EditText edCep = findViewById(R.id.etCep);
-        final Button btBuscar = findViewById(R.id.btBuscar);
+        final Button btBuscarCepMain = findViewById(R.id.btBuscarCepMain);
+        final Button btBuscarCnpjMain = findViewById(R.id.btBuscarCnpjMain);
 
-        btBuscar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final String numeroCep = edCep.getText().toString();
-                if (numeroCep.isEmpty()) {
-                    Toast.makeText(MainActivity.this, "Informe o CEP", Toast.LENGTH_LONG).show();
-                    edCep.requestFocus();
-                } else {
-                    buscarCep(numeroCep);
-                }
-            }
-        });
+        btBuscarCepMain.setOnClickListener(this);
+        btBuscarCnpjMain.setOnClickListener(this);
     }
 
-    private void buscarCep(String numeroCep) {
-        final ProgressBar pbLoading = findViewById(R.id.pbLoading);
-        pbLoading.setVisibility(View.VISIBLE);
-        final TextView tvInfo = findViewById(R.id.tvInfo);
-        tvInfo.setText("");
-        final Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(ConstantUtil.URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        final InverTextoApi inverTextoApi = retrofit.create(InverTextoApi.class);
-        final Call<LogradouroModel> call = inverTextoApi.getLogradouro(
-            numeroCep, ConstantUtil.TOKEN
-        );
-        call.enqueue(new Callback<LogradouroModel>() {
-            @Override
-            public void onResponse(Call<LogradouroModel> call, Response<LogradouroModel> response) {
-                pbLoading.setVisibility(View.INVISIBLE);
-                if (response.isSuccessful()) {
-                    final LogradouroModel logradouroModel = response.body();
-                    if (logradouroModel != null) {
-                        tvInfo.setText(logradouroModel.format());
-                    }
-                } else {
-                    Toast.makeText(MainActivity.this, "Erro ao buscar informações do CEP", Toast.LENGTH_LONG).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<LogradouroModel> call, Throwable throwable) {
-                pbLoading.setVisibility(View.INVISIBLE);
-                Toast.makeText(MainActivity.this, "Verifique as conexões com a Internet", Toast.LENGTH_LONG).show();
-            }
-        });
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.btBuscarCepMain) {
+            // Abrir a tela de Busca de CEPs
+            final Intent telaBuscarCep = new Intent(MainActivity.this, CepActivity.class);
+            startActivity(telaBuscarCep);
+        } else if (view.getId() == R.id.btBuscarCnpjMain) {
+            // Abrir a tela de Busca de CNPJs
+            final Intent telaBuscarCnpj = new Intent(MainActivity.this, CnpjActivity.class);
+            startActivity(telaBuscarCnpj);
+        }
     }
 }

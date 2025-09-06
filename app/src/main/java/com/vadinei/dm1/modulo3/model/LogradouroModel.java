@@ -43,8 +43,7 @@ public class LogradouroModel {
         sb.append("Logradouro: ").append(street).append("\n");
         sb.append("Bairro: ").append(neighborhood).append("\n");
         sb.append("Cidade: ").append(city).append("\n");
-        sb.append("Estado: ").append(state).append("\n");
-        sb.append("Código IBGE: ").append(ibge).append("\n");
+        sb.append("Estado: ").append(state);
         return sb.toString();
     }
 }
