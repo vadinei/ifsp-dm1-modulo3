@@ -1,5 +1,6 @@
 package com.vadinei.dm1.modulo3.api;
 
+import com.vadinei.dm1.modulo3.model.EmpresaModel;
 import com.vadinei.dm1.modulo3.model.LogradouroModel;
 
 import retrofit2.Call;
@@ -11,6 +12,12 @@ public interface InverTextoApi {
     @GET("/v1/cep/{numeroCep}")
     Call<LogradouroModel> getLogradouro(
             @Path("numeroCep") String numeroCep,
+            @Query("token") String token
+    );
+
+    @GET("/v1/cnpj/{numeroCnpj}")
+    Call<EmpresaModel> getEmpresa(
+            @Path("numeroCnpj") String numeroCnpj,
             @Query("token") String token
     );
 }

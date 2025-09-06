@@ -3,4 +3,9 @@
     <string name="informacoes">Informações:</string>
     <string name="buscar">Buscar</string>
     <string name="digite_cep_para_buscar_endereco">Digite o CEP para buscar o endereço:</string>
+    <string name="digite_cnpj_para_buscar_empresa">Digite o CNPJ para buscar a empresa:</string>
+    <string name="bem_vindo">Bem-vindo(a) ao \nBusca Fácil</string>
+    <string name="buscar_cep">Buscar CEP</string>
+    <string name="buscar_cnpj">Buscar CNPJ</string>
+    <string name="voltar">Voltar</string>
 </resources>

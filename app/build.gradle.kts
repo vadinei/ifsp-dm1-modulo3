@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -14,6 +16,14 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val propertie = Properties()
+        propertie.load(project.rootProject.file( "local.properties" ).inputStream())
+        buildConfigField( "String" , "INVERTEXTO_TOKEN" , propertie.getProperty( "INVERTEXTO_TOKEN" ))
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     buildTypes {
