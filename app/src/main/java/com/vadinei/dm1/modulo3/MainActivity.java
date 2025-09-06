@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,7 +56,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void buscarCep(String numeroCep) {
+        final ProgressBar pbLoading = findViewById(R.id.pbLoading);
+        pbLoading.setVisibility(View.VISIBLE);
         final TextView tvInfo = findViewById(R.id.tvInfo);
+        tvInfo.setText("");
         final Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ConstantUtil.URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -67,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
         call.enqueue(new Callback<LogradouroModel>() {
             @Override
             public void onResponse(Call<LogradouroModel> call, Response<LogradouroModel> response) {
+                pbLoading.setVisibility(View.INVISIBLE);
                 if (response.isSuccessful()) {
                     final LogradouroModel logradouroModel = response.body();
                     if (logradouroModel != null) {
@@ -79,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<LogradouroModel> call, Throwable throwable) {
+                pbLoading.setVisibility(View.INVISIBLE);
                 Toast.makeText(MainActivity.this, "Verifique as conexões com a Internet", Toast.LENGTH_LONG).show();
             }
         });
